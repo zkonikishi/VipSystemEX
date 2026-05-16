@@ -1,6 +1,8 @@
 # VipSystemEx
- 
-[![](https://www.jitpack.io/v/com.gitee.Soldier233/VipSystemRecode.svg)](https://www.jitpack.io/#com.gitee.Soldier233/VipSystemRecode)
+
+[中文](README.md)
+
+[![](https://www.jitpack.io/v/zkonikishi/VipSystemEX.svg)](https://jitpack.io/#zkonikishi/VipSystemEX)
 
 ## Description
 VipSystemEx can do you a favor to manage the Vip of your server. The plugin supports permanent, timed, switchable vip group.  

@@ -1,6 +1,8 @@
 # VipSystem
- 
-[![](https://www.jitpack.io/v/com.gitee.Soldier233/VipSystemRecode.svg)](https://www.jitpack.io/#com.gitee.Soldier233/VipSystemRecode)
+
+切换语言： [English](README.en.md)
+
+[![](https://www.jitpack.io/v/zkonikishi/VipSystemEX.svg)](https://jitpack.io/#zkonikishi/VipSystemEX)
 
 ## 简介
 VipSystemEx 可以帮你自主管理服务器的 VIP，支持限时、永久、可切换的 VIP。本插件使用带索引的 SQLite 或 MySQL 进行数据存储，支持自定义开启/关闭连接池，兼容性和性能都比较均衡。
