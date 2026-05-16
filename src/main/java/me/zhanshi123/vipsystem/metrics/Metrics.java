@@ -1,5 +1,6 @@
 package me.zhanshi123.vipsystem.metrics;
 
+import me.zhanshi123.vipsystem.util.SchedulerCompat;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.ServicePriority;
@@ -13,6 +14,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
@@ -23,6 +25,7 @@ import java.util.zip.GZIPOutputStream;
  *
  * Check out https://bStats.org/ to learn more about bStats!
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class Metrics {
 
     static {
@@ -139,12 +142,7 @@ public class Metrics {
                 }
                 // Nevertheless we want our code to run in the Bukkit main thread, so we have to use the Bukkit scheduler
                 // Don't be afraid! The connection to the bStats server is still async, only the stats collection is sync ;)
-                Bukkit.getScheduler().runTask(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        submitData();
-                    }
-                });
+                SchedulerCompat.runGlobal(plugin, () -> submitData());
             }
         }, 1000*60*5, 1000*60*30);
         // Submit the data every 30 minutes, first time after 5 minutes to give other plugins enough time to start
@@ -268,7 +266,7 @@ public class Metrics {
         if (Bukkit.isPrimaryThread()) {
             throw new IllegalAccessException("This method must not be called from the main thread!");
         }
-        HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) URI.create(URL).toURL().openConnection();
 
         // Compress the data to save bandwidth
         byte[] compressedData = compress(data.toString());

@@ -8,6 +8,7 @@ import me.zhanshi123.vipsystem.api.event.VipExpireEvent;
 import me.zhanshi123.vipsystem.api.event.VipRenewEvent;
 import me.zhanshi123.vipsystem.customcommand.CustomCommand;
 import me.zhanshi123.vipsystem.task.CheckVipTask;
+import me.zhanshi123.vipsystem.util.SchedulerCompat;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -60,7 +61,7 @@ public class VipManager {
                 Main.getConfigManager().getWorlds().forEach(worldName -> Main.getPermission().playerAddGroup(worldName, player, group));
             }
         }
-        new CheckVipTask(player).runTask(Main.getInstance());
+        SchedulerCompat.runPlayer(Main.getInstance(), player, () -> new CheckVipTask(player).run());
     }
 
     public void addVip(Player player, VipData vipData) {
@@ -91,7 +92,7 @@ public class VipManager {
         VipRenewEvent renewEvent = new VipRenewEvent(player, vipData);
         Bukkit.getPluginManager().callEvent(renewEvent);
         Main.getCache().addVipData(name, vipData);
-        new CheckVipTask(player).runTask(Main.getInstance());
+        SchedulerCompat.runPlayer(Main.getInstance(), player, () -> new CheckVipTask(player).run());
     }
 
     public VipData removeVipWithoutCommandsInternal(Player player, boolean natural) {

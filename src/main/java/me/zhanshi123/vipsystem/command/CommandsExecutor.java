@@ -37,7 +37,7 @@ public class CommandsExecutor implements CommandExecutor, TabCompleter {
                     return true;
                 }
             } else if (subCommand instanceof PermissionCommand) {
-                if (Main.getPermission().has(commandSender, "vipsystem." + subCommand.getName())) {
+                if (Main.hasPermission(commandSender, "vipsystem." + subCommand.getName())) {
                     return handle(commandSender, command, label, args, subCommand);
                 } else {
                     commandSender.sendMessage(MessageManager.getString("permissionDeny"));

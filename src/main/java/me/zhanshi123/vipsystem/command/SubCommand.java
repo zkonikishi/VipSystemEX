@@ -53,7 +53,7 @@ public abstract class SubCommand {
 
     public boolean hasPermission(CommandSender player) {
         if (this instanceof PermissionCommand) {
-            return Main.getPermission().has(player, "vipsys." + name);
+            return Main.hasPermission(player, "vipsys." + name);
         }
         if (this instanceof AdminCommand) {
             return player.isOp();

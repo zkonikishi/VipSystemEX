@@ -1,10 +1,12 @@
 # VipSystemEx
-
+ 
 [![](https://www.jitpack.io/v/com.gitee.Soldier233/VipSystemRecode.svg)](https://www.jitpack.io/#com.gitee.Soldier233/VipSystemRecode)
 
 ## Description
 VipSystemEx can do you a favor to manage the Vip of your server. The plugin supports permanent, timed, switchable vip group.  
 VipSystemEx use cached MySQL or SQLite with indexes as database, supporting enable/disable connection pool(default on), which ensures the compatibility and the efficiency.
+
+**Current Version: 26.2.1 | Supports Minecraft 26.1+ (Paper/Folia)**
 
 ## Commands
 
@@ -13,10 +15,12 @@ VipSystemEx use cached MySQL or SQLite with indexes as database, supporting enab
 |/vipsys me | Get your vip details | Null |
 |/vipsys changevip | Change activated vip group | vipsys.changevip |
 |/vipsys give [Player] [Group] [Time] | Give vip(Time format: xdxhxmxs, x days x hours x minutes x seconds) | vipsys.give |
+|/vipsys addtime [Player] [Time] | Add time to a player's existing timed vip | vipsys.give |
 |/vipsys remove [Player] | Remove vip | vipsys.remove |
 |/vipsys list | Show the list of vip | vipsys.list |
 |/vipsys look [Player] | Get the vip detail of a specific player | vipsys.look |
 |/vipsys reload | Reload the plugin | vipsys.reload |
+|/vipsys customs | List custom functions | vipsys.customs |
 
 ## Instructions
 ### Fundamental Usage
@@ -41,6 +45,8 @@ Below are the mappings.
 | %vipsystem_vip% | vip group name |
 | %vipsystem_expire% | vip expire date |
 | %vipsystem_previous% | group name before activating vip |
+| %vipsystem_left% | days left (decimal) |
+| %vipsystem_left_formatted% | time left in human-readable format (e.g. 2d 3h 15m 30s) |
 
 ### Advanced Usage
 #### Language
@@ -97,4 +103,26 @@ If you need to add more groups, it is the same method.
 If you don't need the function, you can delete it.
 ## API
 You can use```VipSystemAPI.getInstance()``` to get the instance of ```VipSystemAPI```  
-Javadoc is on the way.
+Usage with Maven:  
+```
+<repository>
+  <id>soldier-repo</id>
+  <url>https://repo.zhanshi123.me/repository/maven-public/</url>
+</repository>
+```
+```
+<dependency>
+  <groupId>me.zhanshi123</groupId>
+  <artifactId>VipSystemEx</artifactId>
+  <version>26.2.1</version>
+  <scope>provided</scope>
+</dependency>
+```
+
+## Build Requirements (MC 26.1+)
+- Runtime: Paper/Folia (`folia-supported: true`)
+- Java: 25+
+- Minecraft: 26.1 and above
+- API dependency: `io.papermc.paper:paper-api:${paper.api.version}`
+
+If your server uses a different 26.1.x build, update `paper.api.version` in `pom.xml` (for example `26.1.2.build.xx-stable`).

@@ -2,17 +2,16 @@ package me.zhanshi123.vipsystem.task;
 
 import me.zhanshi123.vipsystem.Main;
 import me.zhanshi123.vipsystem.api.VipSystemAPI;
-import org.bukkit.scheduler.BukkitRunnable;
+import me.zhanshi123.vipsystem.util.SchedulerCompat;
 
-public class CheckAllTask extends BukkitRunnable {
+public class CheckAllTask {
 
 
-    @Override
     public void run() {
         VipSystemAPI.getInstance().getOnlinePlayers()
-                .forEach(player -> new CheckVipTask(player).runTask(Main.getInstance()));
+            .forEach(player -> SchedulerCompat.runPlayer(Main.getInstance(), player, () -> new CheckVipTask(player).run()));
         Main.getDataBase().getAllFunctions().forEach(
-                storedFunction -> new CheckFunctionTask(storedFunction).runTask(Main.getInstance())
+            storedFunction -> SchedulerCompat.runGlobal(Main.getInstance(), () -> new CheckFunctionTask(storedFunction).run())
         );
     }
 }

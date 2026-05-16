@@ -2,6 +2,7 @@ package me.zhanshi123.vipsystem.manager;
 
 import me.zhanshi123.vipsystem.Main;
 import me.zhanshi123.vipsystem.task.UpdateCheckTask;
+import me.zhanshi123.vipsystem.util.SchedulerCompat;
 import me.zhanshi123.vipsystem.util.Update;
 
 public class UpdateManager {
@@ -16,6 +17,6 @@ public class UpdateManager {
     }
 
     public void checkUpdate() {
-        new UpdateCheckTask().runTaskLaterAsynchronously(Main.getInstance(), 200L);
+        SchedulerCompat.runAsyncLater(Main.getInstance(), () -> new UpdateCheckTask().run(), 200L);
     }
 }

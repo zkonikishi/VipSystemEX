@@ -62,7 +62,7 @@ public class GiveCommand extends SubCommand implements PermissionCommand, TabCom
     public List<CommandTab> getArguments() {
         return Arrays.asList(new CommandTab[]{
                 () -> VipSystemAPI.getInstance().getOnlinePlayers().stream().map(Player::getName).collect(Collectors.toList()),
-                () -> Arrays.asList(Main.getPermission().getGroups()),
+            () -> Arrays.asList(Main.getAllGroups()),
                 () -> Arrays.asList("7d", "30d", "180d", "-1")
         });
     }

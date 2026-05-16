@@ -1,6 +1,6 @@
-updateCheckFailure: '§6§lVipSystem §7>>> §aUpdate checks failed, reason: {0}'
-latestVersion: '§6§lVipSystem §7>>> §aYou are running the latest version of VipSystem'
-newUpdate: '§6§lVipSystem §7>>> §aVipSystem {0} has released!'
+updateCheckFailure: '§6§lVipSystemEx §7>>> §aUpdate checks failed, reason: {0}'
+latestVersion: '§6§lVipSystemEx §7>>> §aYou are running the latest version of VipSystemEx'
+newUpdate: '§6§lVipSystemEx §7>>> §aVipSystemEx {0} has released!'
 fatalError: '§6§lVipSystem §7>>> §cFatal error has occurred! Stop loading!'
 permissionDeny: '§cYou do not have enough permission to do this'
 consoleForbid: '§cYou cannot use the command in Console'
@@ -64,3 +64,9 @@ Command:
   run:
     usage: '/vipsys run [Function] <Args>'
     notFound: 'Function not found'
+  addtime:
+    desc: 'Add time to the player existing vip'
+    usage: '/vipsys addtime [Player] [Time]'
+    noVip: '§cThe player has no Vip!'
+    isPermanent: '§cCannot add time to a permanent Vip!'
+    success: '§7Vip time successfully extended'

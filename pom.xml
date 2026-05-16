@@ -5,15 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.zhanshi123</groupId>
-    <artifactId>VipSystem</artifactId>
-    <version>4.13</version>
+    <artifactId>VipSystemEx</artifactId>
+    <version>26.2.1</version>
     <packaging>jar</packaging>
 
-    <name>VipSystem</name>
+    <name>VipSystemEx</name>
 
     <description>A plugin to manage Vip automatically</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>25</maven.compiler.release>
+        <paper.api.version>26.1.2.build.63-stable</paper.api.version>
+        <hikari.version>6.3.0</hikari.version>
+        <placeholderapi.version>2.11.6</placeholderapi.version>
+        <maven.compiler.plugin.version>3.14.1</maven.compiler.plugin.version>
+        <maven.shade.plugin.version>3.6.1</maven.shade.plugin.version>
     </properties>
     <url>https://dl.zhanshi123.me#VipSystem</url>
 
@@ -26,18 +32,17 @@
                 <version>2.7</version>
             </plugin>
             <plugin>
-                <version>3.6.1</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <release>${maven.compiler.release}</release>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${maven.shade.plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -59,6 +64,17 @@
         </resources>
     </build>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- CVE-2025-67030: Override transitive plexus-utils to patched version -->
+            <dependency>
+                <groupId>org.codehaus.plexus</groupId>
+                <artifactId>plexus-utils</artifactId>
+                <version>3.6.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <distributionManagement>
         <repository>
             <id>release</id>
@@ -68,8 +84,8 @@
 
     <repositories>
         <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
         <repository>
             <id>sonatype</id>
@@ -91,15 +107,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>${paper.api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
-            <version>4.0.3</version>
+            <version>${hikari.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.MilkBowl</groupId>
@@ -110,7 +126,7 @@
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.9.1</version>
+            <version>${placeholderapi.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

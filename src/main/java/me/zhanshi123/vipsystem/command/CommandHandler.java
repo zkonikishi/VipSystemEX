@@ -16,6 +16,7 @@ public class CommandHandler {
         commands.add(new MeCommand());
         commands.add(new RemoveCommand());
         commands.add(new GiveCommand());
+        commands.add(new AddTimeCommand());
         commands.add(new ClaimCommand());
         commands.add(new ReloadCommand());
         commands.add(new LookCommand());

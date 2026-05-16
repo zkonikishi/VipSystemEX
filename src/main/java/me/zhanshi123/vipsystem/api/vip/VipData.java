@@ -16,7 +16,7 @@ public class VipData {
     public VipData(Player player, String vip, long duration) {
         this.player = VipSystemAPI.getInstance().getPlayerName(player);
         this.vip = vip;
-        this.previous = Main.getPermission().getPrimaryGroup(player);
+        this.previous = Main.getPrimaryGroup(player);
         this.start = System.currentTimeMillis();
         this.duration = duration;
     }

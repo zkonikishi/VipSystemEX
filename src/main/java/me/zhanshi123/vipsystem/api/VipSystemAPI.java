@@ -6,9 +6,9 @@ import me.zhanshi123.vipsystem.Main;
 import me.zhanshi123.vipsystem.api.storage.VipStorageManager;
 import me.zhanshi123.vipsystem.api.vip.VipManager;
 import me.zhanshi123.vipsystem.custom.CustomArg;
+import me.zhanshi123.vipsystem.util.SchedulerCompat;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -125,12 +125,7 @@ public class VipSystemAPI {
     }
 
     public void runAsync(AsyncTask consumer) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                consumer.run();
-            }
-        }.runTaskAsynchronously(Main.getInstance());
+        SchedulerCompat.runAsync(Main.getInstance(), consumer::run);
     }
 
 }
