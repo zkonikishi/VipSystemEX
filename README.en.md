@@ -1,5 +1,7 @@
 # VipSystemEx
 
+**VipSystemEX — Vip manager plugin compatible with Paper & Folia (Java 25+, MC 26.1+)**
+
 [中文](README.md)
 
 [![](https://www.jitpack.io/v/zkonikishi/VipSystemEX.svg)](https://jitpack.io/#zkonikishi/VipSystemEX)

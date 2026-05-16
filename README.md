@@ -1,5 +1,7 @@
 # VipSystem
 
+**VipSystemEX — 兼容 Paper / Folia 的 VIP 管理插件（Java 25+, MC 26.1+）**
+
 切换语言： [English](README.en.md)
 
 [![](https://www.jitpack.io/v/zkonikishi/VipSystemEX.svg)](https://jitpack.io/#zkonikishi/VipSystemEX)
