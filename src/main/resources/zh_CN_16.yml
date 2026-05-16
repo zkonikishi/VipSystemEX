@@ -2,10 +2,10 @@
 #请使用以下格式
 #$[FFFFFF]消息
 #注意: 控制台无法显示16进制颜色
-updateCheckFailure: '§6§lVipSystem §7>>> §a更新检查失败，原因: {0}'
-latestVersion: '§6§lVipSystem §7>>> §a你正在使用最新版本的VipSystem'
-newUpdate: '§6§lVipSystem §7>>> §aVipSystem {0} 更新了，内容: {1}'
-fatalError: '§6§lVipSystem §7>>> §c发生致命错误，停止加载'
+updateCheckFailure: '§6§lVipSystemEx §7>>> §a更新检查失败，原因: {0}'
+latestVersion: '§6§lVipSystemEx §7>>> §a你正在使用最新版本的VipSystemEx'
+newUpdate: '§6§lVipSystemEx §7>>> §aVipSystemEx {0} 更新了，内容: {1}'
+fatalError: '§6§lVipSystemEx §7>>> §c发生致命错误，停止加载'
 permissionDeny: '§c权限不足'
 consoleForbid: '§c你不能在控制台执行这个命令'
 playerNotFound: '§c目标玩家不在线'
@@ -69,3 +69,9 @@ Command:
     usage: '$[DC143C]/$[FF1493]v$[FFA500]i$[FFFF00]p$[3CB371]s$[4169E1]y$[4B0082]s $[66CCFF]run [函数名] <函数参数>'
     notFound: '函数不存在'
     argNotMatch: '参数个数不匹配'
+  addtime:
+    desc: '为玩家现有Vip增加时间'
+    usage: '$[DC143C]/$[FF1493]v$[FFA500]i$[FFFF00]p$[3CB371]s$[4169E1]y$[4B0082]s $[66CCFF]addtime [玩家] [时间]'
+    noVip: '§c该玩家没有Vip'
+    isPermanent: '§c无法为永久Vip增加时间'
+    success: '§7Vip时间延长成功'

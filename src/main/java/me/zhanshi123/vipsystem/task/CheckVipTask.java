@@ -3,10 +3,10 @@ package me.zhanshi123.vipsystem.task;
 import me.zhanshi123.vipsystem.Main;
 import me.zhanshi123.vipsystem.api.VipSystemAPI;
 import me.zhanshi123.vipsystem.api.vip.VipData;
+import me.zhanshi123.vipsystem.util.SchedulerCompat;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
-public class CheckVipTask extends BukkitRunnable {
+public class CheckVipTask {
     private Player player;
     private String name;
 
@@ -15,9 +15,8 @@ public class CheckVipTask extends BukkitRunnable {
         name = VipSystemAPI.getInstance().getPlayerName(player);
     }
 
-    @Override
     public void run() {
-        if (player == null) {
+        if (player == null || !player.isOnline()) {
             return;
         }
         Main.getInstance().debug("Check " + player.getName() + " 's vipData");
@@ -39,6 +38,6 @@ public class CheckVipTask extends BukkitRunnable {
             temp = 0;
         }
         Main.getInstance().debug(player.getName() + " ready to run delayed remove task in " + (temp / 1000 * 20) + " ticks");
-        new DelayedRemoveVipTask(player).runTaskLater(Main.getInstance(), temp / 1000 * 20);
+        SchedulerCompat.runPlayerLater(Main.getInstance(), player, () -> new DelayedRemoveVipTask(player).run(), temp / 1000 * 20);
     }
 }

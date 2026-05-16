@@ -4,6 +4,7 @@ import me.zhanshi123.vipsystem.Main;
 import me.zhanshi123.vipsystem.api.VipSystemAPI;
 import me.zhanshi123.vipsystem.api.vip.VipData;
 import me.zhanshi123.vipsystem.task.CheckVipTask;
+import me.zhanshi123.vipsystem.util.SchedulerCompat;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +12,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,13 +26,8 @@ public class Cache implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onJoin(PlayerJoinEvent e) {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                Player player = e.getPlayer();
-                cache(player);
-            }
-        }.runTaskLaterAsynchronously(Main.getInstance(), 20L);
+        Player player = e.getPlayer();
+        SchedulerCompat.runAsyncLater(Main.getInstance(), () -> cache(player), 20L);
     }
 
     @EventHandler
@@ -53,12 +48,7 @@ public class Cache implements Listener {
         Main.getInstance().debug("Data: " + vipData);
         map.remove(name);
         map.put(name, vipData);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                new CheckVipTask(player).runTask(Main.getInstance());
-            }
-        }.runTask(Main.getInstance());
+        SchedulerCompat.runPlayer(Main.getInstance(), player, () -> new CheckVipTask(player).run());
 
     }
 

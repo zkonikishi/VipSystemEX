@@ -14,6 +14,7 @@ import me.zhanshi123.vipsystem.data.connector.PoolHandler;
 import me.zhanshi123.vipsystem.data.connector.SQLHandler;
 import org.bukkit.Bukkit;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,6 +31,10 @@ public class Database {
         boolean useMySQL = Main.getConfigManager().isUseMySQL();
         List<String> mysql = Main.getConfigManager().getMySQL();
         table = mysql.get(3);
+        File dataFolder = Main.getInstance().getDataFolder();
+        if (!dataFolder.exists()) {
+            dataFolder.mkdirs();
+        }
         connectionData = new ConnectionData(useMySQL, mysql);
         try {
             if (Main.getConfigManager().isUsePool()) {
@@ -171,12 +176,12 @@ public class Database {
     private void handleException(Exception e) {
         String message = e.getMessage();
         e.printStackTrace();
-        if (message.contains("locked")) {
+        if (message != null && message.contains("locked")) {
             Main.getInstance().getLogger().warning("Detect SQLite Error, please try restart the server! Or you will lose your Vip data");
             Main.getInstance().getLogger().warning("检测到SQLite数据库被锁定，如果没有打开过.db的数据文件，请重启服务器。此状态下不会有任何vip数据被保存");
             return;
         }
-        if (message.contains("out of memory")) {
+        if (message != null && message.contains("out of memory")) {
             Main.getInstance().getLogger().warning("检测到SQLite数据库内存溢出，请检查你的目录是否有中文");
         }
     }

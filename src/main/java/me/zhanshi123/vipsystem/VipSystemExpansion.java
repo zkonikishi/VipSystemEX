@@ -24,7 +24,7 @@ public class VipSystemExpansion extends PlaceholderExpansion {
 
     @Override
     public String getRequiredPlugin() {
-        return "VipSystem";
+        return "VipSystemEx";
     }
 
     @Override
@@ -47,6 +47,22 @@ public class VipSystemExpansion extends PlaceholderExpansion {
             return vipData != null ? vipData.getDuration() != -1 ? vipData.getExpireDate() : "∞" : "-";
         } else if (params.equalsIgnoreCase("left")) {
             return vipData != null ? vipData.getDuration() != -1 ? String.valueOf(vipData.getLeftDays()) : "∞" : "-";
+        } else if (params.equalsIgnoreCase("left_formatted")) {
+            if (vipData == null) return "-";
+            if (vipData.getDuration() == -1) return "∞";
+            long millis = vipData.getTimeToExpire();
+            if (millis <= 0) return "0s";
+            long totalSeconds = millis / 1000;
+            long days = totalSeconds / 86400;
+            long hours = (totalSeconds % 86400) / 3600;
+            long minutes = (totalSeconds % 3600) / 60;
+            long seconds = totalSeconds % 60;
+            StringBuilder sb = new StringBuilder();
+            if (days > 0) sb.append(days).append("d ");
+            if (hours > 0) sb.append(hours).append("h ");
+            if (minutes > 0) sb.append(minutes).append("m ");
+            if (seconds > 0 || sb.length() == 0) sb.append(seconds).append("s");
+            return sb.toString().trim();
         }
         return null;
     }

@@ -2,17 +2,17 @@ package me.zhanshi123.vipsystem.task;
 
 import me.zhanshi123.vipsystem.Main;
 import me.zhanshi123.vipsystem.custom.StoredFunction;
+import me.zhanshi123.vipsystem.util.SchedulerCompat;
 import org.bukkit.Bukkit;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.entity.Player;
 
-public class CheckFunctionTask extends BukkitRunnable {
+public class CheckFunctionTask {
     private StoredFunction function;
 
     public CheckFunctionTask(StoredFunction function) {
         this.function = function;
     }
 
-    @Override
     public void run() {
         if (function == null) {
             return;
@@ -21,7 +21,11 @@ public class CheckFunctionTask extends BukkitRunnable {
             return;
         }
         if (function.getAwaitingPlayer() != null) {
-            if (Bukkit.getPlayer(function.getAwaitingPlayer()) == null) {
+            String awaitingName = function.getAwaitingPlayer();
+            Player awaitingPlayer = Bukkit.getOnlinePlayers().stream()
+                    .filter(p -> p.getName().equalsIgnoreCase(awaitingName))
+                    .findFirst().orElse(null);
+            if (awaitingPlayer == null) {
                 return;
             }
         }
@@ -29,6 +33,6 @@ public class CheckFunctionTask extends BukkitRunnable {
         if (temp < 0) {
             temp = 0;
         }
-        new DelayedExecuteFunctionTask(function).runTaskLater(Main.getInstance(), temp / 1000 * 20);
+        SchedulerCompat.runGlobalLater(Main.getInstance(), () -> new DelayedExecuteFunctionTask(function).run(), temp / 1000 * 20);
     }
 }

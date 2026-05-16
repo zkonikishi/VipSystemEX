@@ -1,15 +1,20 @@
 package me.zhanshi123.vipsystem.data.connector;
 
+import me.zhanshi123.vipsystem.Main;
+
+import java.io.File;
 import java.util.List;
 
 public class ConnectionData {
     private boolean useMySQL;
     private List<String> mysql;
-    private String sqlite = "jdbc:sqlite:plugins/VipSystem/database.db";
+    private String sqlite;
 
     public ConnectionData(boolean useMySQL, List<String> mysql) {
         this.useMySQL = useMySQL;
         this.mysql = mysql;
+        File dbFile = new File(Main.getInstance().getDataFolder(), "database.db");
+        this.sqlite = "jdbc:sqlite:" + dbFile.getPath().replace('\\', '/');
     }
 
     public boolean isUseMySQL() {
